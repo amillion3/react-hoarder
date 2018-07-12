@@ -3,6 +3,31 @@ import React from 'react';
 import './Login.css';
 
 class Login extends React.Component {
+  state = {
+    loginUser: {
+      loginEmail: '',
+      loginPassword: '',
+    },
+  };
+
+  eventClickedLoginSubmit = e => {
+    const {loginUser} = this.state;
+    e.preventDefault();
+    console.error(loginUser);
+  }
+
+  emailChange = e => {
+    const tempEmail = {...this.state.loginUser};
+    tempEmail.loginEmail = e.target.value;
+    this.setState({loginUser: tempEmail});
+  }
+
+  passwordChange = e => {
+    const tempPassword = {...this.state.loginUser};
+    tempPassword.loginPassword = e.target.value;
+    this.setState({loginUser: tempPassword});
+  }
+
   render () {
     const {loginUser} = this.state;
     return (
