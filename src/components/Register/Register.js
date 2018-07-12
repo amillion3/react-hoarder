@@ -10,6 +10,12 @@ class Register extends React.Component {
     },
   };
 
+  eventClickedRegisterSubmit = e => {
+    const {registerNewUser} = this.state;
+    console.error(registerNewUser);
+    e.preventDefault();
+  };
+
   emailChange = e => {
     const tempEmail = {...this.state.registerNewUser};
     tempEmail.userEmail = e.target.value;
