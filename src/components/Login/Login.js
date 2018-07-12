@@ -1,5 +1,7 @@
 import React from 'react';
 
+import authRequests from '../../firebaseRequests/auth';
+
 import './Login.css';
 
 class Login extends React.Component {
@@ -13,7 +15,14 @@ class Login extends React.Component {
   eventClickedLoginSubmit = e => {
     const {loginUser} = this.state;
     e.preventDefault();
-    console.error(loginUser);
+    authRequests
+      .loginExistingUser(loginUser)
+      .then(() => {
+
+      })
+      .catch(err => {
+        console.error('Error logging in', err);
+      });
   }
 
   emailChange = e => {

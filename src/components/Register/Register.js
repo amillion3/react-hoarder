@@ -1,5 +1,7 @@
 import React from 'react';
 
+import authRequests from '../../firebaseRequests/auth';
+
 import './Register.css';
 
 class Register extends React.Component {
@@ -12,8 +14,14 @@ class Register extends React.Component {
 
   eventClickedRegisterSubmit = e => {
     const {registerNewUser} = this.state;
-    console.error(registerNewUser);
     e.preventDefault();
+    authRequests
+      .registerNewUser(registerNewUser)
+      .then()
+      .catch(err => {
+        console.error('Error registering', err);
+      });
+
   };
 
   emailChange = e => {
