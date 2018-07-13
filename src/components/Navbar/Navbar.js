@@ -5,10 +5,12 @@ import './Navbar.css';
 
 class Navbar extends React.Component {
   render () {
+    const {authed, userWantsOut} = this.props;
 
     const logoutClickEvent = () => {
       authRequests.logoutUser();
-    }
+      userWantsOut();
+    };
 
     return (
       <nav className="navbar navbar-default">
@@ -24,6 +26,22 @@ class Navbar extends React.Component {
             <p className="navbar-brand" href="#">React Hoarder</p>
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {
+              authed ? (
+                <ul className='nav navbar-nav navbar-right'>
+                  <button
+                    className='btn btn-primary'
+                    onClick={logoutClickEvent}
+                  >Logout</button>
+                </ul>
+              ) : (
+                <ul className='nav navbar-nav navbar-right'>
+                  <li>
+                    <p>You need to log in</p>
+                  </li>
+                </ul>
+              )
+            }
             <ul className="nav navbar-nav navbar-right">
               <button
                 className='btn btn-primary'
