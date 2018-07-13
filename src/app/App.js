@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
 import Navbar from '../components/Navbar/Navbar';
+import ShowStuff from '../components/ShowStuff/ShowStuff';
 
 import fbConnection from '../firebaseRequests/connection';
 
@@ -43,6 +44,7 @@ class App extends Component {
         />
         <Register />
         <Login />
+        <ShowStuff />
       </div>
     );
   }
