@@ -4,7 +4,7 @@ import axios from 'axios';
 const getStuffRequest = () => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${constants.firebaseConfig.databaseURL}/fishes.json`)
+      .get(`${constants.firebaseConfig.databaseURL}/items.json`)
       .then(response => {
         const stuffs = [];
         if (response.data !== null) {
