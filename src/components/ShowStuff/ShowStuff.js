@@ -36,8 +36,8 @@ class ShowStuff extends React.Component {
           <h3>This is stuff you DO have</h3>
         </div>
         <div className='myStuff col-xs-6'>
-          <h3>This is stuff you don't have</h3>
-          <div className=''>
+          <h3>This is stuff you don't have (sadly)</h3>
+          <div className='col-xs-12'>
             {itemComponents}
           </div>
         </div>
