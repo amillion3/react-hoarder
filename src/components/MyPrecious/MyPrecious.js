@@ -1,11 +1,12 @@
 import React from 'react';
 
-import './Items.css';
+import './MyPrecious.css';
 
-class Items extends React.Component {
-  gimmeItem = () => {
-    this.props.hoardIt(this.props.details.id);
-  };
+class MyPrecious extends React.Component {
+  removeItem = () => {
+    this.props.removeFromOrder(this.props.details.id);
+  }
+
   render () {
     const {details} = this.props;
     return (
@@ -18,9 +19,9 @@ class Items extends React.Component {
           <p>{details.itemDescription}</p>
           <div className='col-xs-12'>
             <button
-              className='btn btn-warning'
-              onClick={this.gimmeItem}
-            >GIMME</button>
+              className='btn btn-danger'
+              onClick={this.removeItem}
+            >Remove</button>
           </div>
         </div>
       </div>
@@ -28,4 +29,4 @@ class Items extends React.Component {
   }
 };
 
-export default Items;
+export default MyPrecious;
