@@ -10,21 +10,12 @@ import './AddStuff.css';
 
 class AddStuff extends React.Component {
   state = {
-    allItems: [],
+    myItems: [],
     toAdd: {},
   };
 
-  gimmeItem = key => {
-    console.log('holy shit it works', this);
-    const newItem = {...this.state.toAdd};
-    newItem[key] = newItem[key] + 1 || 1;
-    this.setState({toAdd: newItem});
-
-    this.saveItem();
-  }
-
   saveItem = () => {
-    const newItems = {allItems: {...this.state.toAdd}};
+    const newItems = {myItems: {...this.state.toAdd}};
     console.log(newItems);
     newItems.uid = authRequests.getUid();
     toAddRequests
@@ -37,11 +28,20 @@ class AddStuff extends React.Component {
       });
   }
 
+  gimmeItem (key) {
+    console.log('holy shit it works', this);
+    const newItem = {...this.state.toAdd};
+    newItem[key] = newItem[key] + 1 || 1;
+    this.setState({toAdd: newItem});
+
+    this.saveItem();
+  }
+
   componentDidMount () {
     itemsRequests
       .getStuffRequest()
       .then((items) => {
-        this.setState({allItems: items});
+        this.setState({myItems: items});
       })
       .catch((err) => {
         console.error('error with items get request', err);
@@ -49,11 +49,11 @@ class AddStuff extends React.Component {
   }
 
   render () {
-    const itemComponents = this.state.allItems.map(item => {
+    const itemComponents = this.state.myItems.map(item => {
       return (
         <Items
-          details={item}
           key={item.id}
+          details={item}
           gimmeItem={this.gimmeItem}
         />
       );

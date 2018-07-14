@@ -5,7 +5,8 @@ import firebase from 'firebase';
 import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
 import Navbar from '../components/Navbar/Navbar';
-import ShowStuff from '../components/ShowStuff/ShowStuff';
+import AddStuff from '../components/AddStuff/AddStuff';
+// import ShowStuff from '../components/ShowStuff/ShowStuff';
 import Home from '../components/Home/Home';
 
 import fbConnection from '../firebaseRequests/connection';
@@ -94,7 +95,7 @@ class App extends Component {
               <PrivateRoute
                 path='/thegoods'
                 authed={this.state.authed}
-                component={ShowStuff} />
+                component={AddStuff} />
             </Switch>
           </div>
         </div>

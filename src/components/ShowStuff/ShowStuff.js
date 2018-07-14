@@ -12,6 +12,15 @@ class ShowStuff extends React.Component {
     myItems: [],
   }
 
+  gimmeItem (key) {
+    console.log('holy shit it works', this);
+    const newItem = {...this.state.toAdd};
+    newItem[key] = newItem[key] + 1 || 1;
+    this.setState({toAdd: newItem});
+
+    this.saveItem();
+  }
+
   componentDidMount () {
     itemRequests
       .getStuffRequest()
@@ -29,6 +38,7 @@ class ShowStuff extends React.Component {
         <MyPrecious
           details={myItem}
           key={myItem.id}
+          gimmeItems={this.gimmeItems}
         />
       );
     });
