@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import authRequests from '../../firebaseRequests/auth';
 
@@ -59,6 +60,11 @@ class Register extends React.Component {
             value={registerNewUser.registerPassword}
           />
         </form>
+        <div className="form-group">
+          <div className="col-sm-12 text-center">
+            <Link to="/login">Need to Login?</Link>
+          </div>
+        </div>
         <button
           type='submit'
           onClick={this.eventClickedRegisterSubmit}
