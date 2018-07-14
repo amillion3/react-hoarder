@@ -22,7 +22,16 @@ const getMyHoard = uid => {
 };
 
 const postToMyHoard = newStuff => {
-
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${constants.firebaseConfig.databaseURL}/myHoard.json`, newStuff)
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
 };
 
 export default {getMyHoard, postToMyHoard};
