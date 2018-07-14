@@ -19,7 +19,7 @@ class Items extends React.Component {
           <div className='col-xs-12'>
             <button
               className='btn btn-warning'
-              onClick={this.gimmeItem}
+              onClick={this.addToHoard}
             >GIMME</button>
           </div>
         </div>

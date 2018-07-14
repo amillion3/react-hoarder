@@ -1,6 +1,8 @@
 import React from 'react';
 
-import itemsRequests from '../Items/Items';
+import Items from '../Items/Items';
+
+import itemsRequests from '../../firebaseRequests/stuff';
 import toAddRequests from '../../firebaseRequests/myHoard';
 import authRequests from '../../firebaseRequests/auth';
 
@@ -12,28 +14,11 @@ class AddStuff extends React.Component {
     toAdd: {},
   };
 
-  addToHoard = key => {
-    const newToAdd = {...this.state.toAdd};
-    newToAdd[key] = newToAdd[key] + 1 || 1;
-    this.setState({toAdd: newToAdd});
-  }
-
-  componentDidMount () {
-    itemsRequests
-      .getRequest()
-      .then((items) => {
-        this.setState({allItems: items});
-      })
-      .catch((err) => {
-        console.error('error with items get request', err);
-      });
-  }
-
   saveToHoard = () => {
     const newItems = {allItems: {...this.state.toAdd}};
     newItems.uid = authRequests.getUid();
     toAddRequests
-      .postRequest(newItems)
+      .postToMyHoard(newItems)
       .then(() => {
         this.props.history.push('./');
       })
@@ -42,9 +27,38 @@ class AddStuff extends React.Component {
       });
   }
 
-  render () {
-    return (
+  addToHoard = key => {
+    const newToAdd = {...this.state.toAdd};
+    newToAdd[key] = newToAdd[key] + 1 || 1;
+    this.setState({toAdd: newToAdd});
+    saveToHoard();
+  }
 
+  componentDidMount () {
+    itemsRequests
+      .getStuffRequest()
+      .then((items) => {
+        this.setState({allItems: items});
+      })
+      .catch((err) => {
+        console.error('error with items get request', err);
+      });
+  }
+
+  render () {
+    const itemComponents = this.state.items.map(item => {
+      return (
+        <Items
+          details={item}
+          key={item.id}
+          addToHoard={this.addToHoard}
+        />
+      );
+    });
+    return (
+      <div>
+        {itemComponents}
+      </div>
     );
   }
 };
