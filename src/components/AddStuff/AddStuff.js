@@ -3,7 +3,7 @@ import React from 'react';
 import Items from '../Items/Items';
 
 import itemsRequests from '../../firebaseRequests/stuff';
-import toAddRequests from '../../firebaseRequests/myHoard';
+import myStuffRequests from '../../firebaseRequests/myStuffRequests';
 import authRequests from '../../firebaseRequests/auth';
 
 import './AddStuff.css';
@@ -18,8 +18,8 @@ class AddStuff extends React.Component {
     const newItems = {myItems: {...this.state.toAdd}};
     console.log(newItems);
     newItems.uid = authRequests.getUid();
-    toAddRequests
-      .postToMyHoard(newItems)
+    myStuffRequests
+      .postRequest(newItems)
       .then(() => {
         this.props.history.push('./');
       })
@@ -28,11 +28,11 @@ class AddStuff extends React.Component {
       });
   }
 
-  gimmeItem (key) {
+  gimmeItem = key => {
     console.log('holy shit it works', this);
-    const newItem = {...this.state.toAdd};
+    const newItem = {...this.state.myItems};
     newItem[key] = newItem[key] + 1 || 1;
-    this.setState({toAdd: newItem});
+    this.setState({myItems: newItem});
 
     this.saveItem();
   }
