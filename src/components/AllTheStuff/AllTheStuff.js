@@ -1,12 +1,10 @@
 import React from 'react';
 
-import './Items.css';
+import './AllTheStuff.css';
 
 class Items extends React.Component {
-  addClickEvent = () => {
-    console.log(this.props);
-    this.props.gimmeItem(this.props.details.id);
-    console.log(this.props);
+  gimmeItem = () => {
+    this.props.hoardIt(this.props.details.id);
   };
   render () {
     const {details} = this.props;
@@ -17,11 +15,11 @@ class Items extends React.Component {
         </div>
         <div className="panel-footer">
           <h4>{details.itemName}</h4>
-          <p>{details.itemDescription}</p>
+          <p className='text-small'>{details.itemDescription}</p>
           <div className='col-xs-12'>
             <button
               className='btn btn-warning'
-              onClick={this.addClickEvent}
+              onClick={this.gimmeItem}
             >GIMME</button>
           </div>
         </div>

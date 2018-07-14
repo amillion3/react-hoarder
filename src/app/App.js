@@ -14,6 +14,7 @@ import './App.css';
 
 fbConnection();
 
+
 // helper function                   ...rest = any other components
 const PrivateRoute = ({ component: Component, authed, ...rest}) => {
   return (

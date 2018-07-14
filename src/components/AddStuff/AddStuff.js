@@ -14,8 +14,9 @@ class AddStuff extends React.Component {
     toAdd: {},
   };
 
-  saveToHoard = () => {
+  saveItem = () => {
     const newItems = {allItems: {...this.state.toAdd}};
+    console.log(newItems);
     newItems.uid = authRequests.getUid();
     toAddRequests
       .postToMyHoard(newItems)
@@ -27,11 +28,12 @@ class AddStuff extends React.Component {
       });
   }
 
-  addToHoard = key => {
-    const newToAdd = {...this.state.toAdd};
-    newToAdd[key] = newToAdd[key] + 1 || 1;
-    this.setState({toAdd: newToAdd});
-    saveToHoard();
+  gimmeItem = key => {
+    const newItem = {...this.state.toAdd};
+    newItem[key] = newItem[key] + 1 || 1;
+    this.setState({toAdd: newItem});
+    console.log('joy', this);
+    this.saveItem();
   }
 
   componentDidMount () {
@@ -46,19 +48,19 @@ class AddStuff extends React.Component {
   }
 
   render () {
-    const itemComponents = this.state.items.map(item => {
+    const itemComponents = this.state.allItems.map(item => {
       return (
         <Items
           details={item}
           key={item.id}
-          addToHoard={this.addToHoard}
+          gimmeItem={this.gimmeItem}
         />
       );
     });
     return (
-      <div>
+      <ul>
         {itemComponents}
-      </div>
+      </ul>
     );
   }
 };
