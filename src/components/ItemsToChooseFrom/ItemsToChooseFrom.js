@@ -1,19 +1,14 @@
 import React from 'react';
 
 import Items from '../Items/Items';
+import fbItems from '../../firebaseRequests/fbItems';
 
-import itemsRequests from '../../firebaseRequests/stuff';
-import myStuffRequests from '../../firebaseRequests/myStuffRequests';
-import authRequests from '../../firebaseRequests/auth';
+import './ItemsToChooseFrom.css';
 
-import './AddStuff.css';
-
-class AddStuff extends React.Component {
+class ItemsToChooseFrom extends React.Component {
   state = {
-    myItems: [],
-    toAdd: {},
-  };
-
+    allItems: [],
+  }
   saveItem = () => {
     const newItems = {myItems: {...this.state.toAdd}};
     console.log(newItems);
@@ -30,26 +25,26 @@ class AddStuff extends React.Component {
 
   gimmeItem = key => {
     console.log('holy shit it works', this);
-    const newItem = {...this.state.myItems};
+    const newItem = {...this.state.allItems};
     newItem[key] = newItem[key] + 1 || 1;
     this.setState({myItems: newItem});
 
     this.saveItem();
   }
-
+  // sets state with all the items
   componentDidMount () {
-    itemsRequests
-      .getStuffRequest()
-      .then((items) => {
-        this.setState({myItems: items});
+    fbItems
+      .getAllItems()
+      .then(allItems => {
+        this.setState({allItems});
       })
-      .catch((err) => {
-        console.error('error with items get request', err);
+      .catch(err => {
+        console.error('componentDidMount.fbItems.getAllItems()', err);
       });
   }
 
   render () {
-    const itemComponents = this.state.myItems.map(item => {
+    const itemComponents = this.state.allItems.map(item => {
       return (
         <Items
           key={item.id}
@@ -66,4 +61,4 @@ class AddStuff extends React.Component {
   }
 };
 
-export default AddStuff;
+export default ItemsToChooseFrom;

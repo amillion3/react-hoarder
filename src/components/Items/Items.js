@@ -4,8 +4,6 @@ import './Items.css';
 
 class Items extends React.Component {
   addClickEvent = () => {
-    // this.props does not contain gimmeItem()
-    console.log(this.props);
     this.props.gimmeItem(this.props.details.id);
   }
   render () {

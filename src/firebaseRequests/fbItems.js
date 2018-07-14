@@ -1,7 +1,7 @@
 import constants from '../constants';
 import axios from 'axios';
 
-const getStuffRequest = () => {
+const getAllItems = () => {
   return new Promise((resolve, reject) => {
     axios
       .get(`${constants.firebaseConfig.databaseURL}/items.json`)
@@ -22,6 +22,6 @@ const getStuffRequest = () => {
 };
 
 export default {
-  getStuffRequest,
+  getAllItems,
 
 };
