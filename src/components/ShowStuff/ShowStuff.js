@@ -31,7 +31,7 @@ class ShowStuff extends React.Component {
           key={myItem.id}
         />
       );
-    })
+    });
     const itemComponents = this.state.items.map(item => {
       return (
         <Items

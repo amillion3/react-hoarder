@@ -41,7 +41,7 @@ const PublicRoute = ({ component: Component, authed, ...rest}) => {
           <Component {...props} />
         ) : (
           <Redirect
-            to={{ pathname: '/orders', state: {from: props.location}}}
+            to={{ pathname: '/thegoods', state: {from: props.location}}}
           />
         )
       }
@@ -80,7 +80,7 @@ class App extends Component {
             authed={this.state.authed}
             userWantsOut={this.userWantsOut}
           />
-          <div className='container'>
+          <div className='container col-xs-12'>
             <Switch>
               <Route path='/' exact component={Home}/>
               <PublicRoute
@@ -97,9 +97,6 @@ class App extends Component {
                 component={ShowStuff} />
             </Switch>
           </div>
-          <Register />
-          <Login />
-          <ShowStuff />
         </div>
       </BrowserRouter>
     );

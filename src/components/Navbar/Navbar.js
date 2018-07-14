@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 import authRequests from '../../firebaseRequests/auth';
 
 import './Navbar.css';
@@ -23,31 +25,30 @@ class Navbar extends React.Component {
               <span className="icon-bar"></span>
             </button>
 
-            <p className="navbar-brand" href="#">React Hoarder</p>
+            <Link to="/" className='navbar-brand'>React Hoarder</Link>
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             {
               authed ? (
                 <ul className='nav navbar-nav navbar-right'>
-                  <button
-                    className='btn btn-primary'
-                    onClick={logoutClickEvent}
-                  >Logout</button>
+                  <li>
+                    <Link to='/thegoods'>My Things</Link>
+                  </li>
+                  <li>
+                    <button
+                      className='btn btn-primary'
+                      onClick={logoutClickEvent}
+                    >Logout</button>
+                  </li>
                 </ul>
               ) : (
                 <ul className='nav navbar-nav navbar-right'>
                   <li>
-                    <p>You need to log in</p>
+                    <Link to='/login'>Login</Link>
                   </li>
                 </ul>
               )
             }
-            <ul className="nav navbar-nav navbar-right">
-              <button
-                className='btn btn-primary'
-                onClick={logoutClickEvent}
-              >Logout</button>
-            </ul>
           </div>
         </div>
       </nav>
