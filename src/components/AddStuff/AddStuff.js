@@ -14,6 +14,15 @@ class AddStuff extends React.Component {
     toAdd: {},
   };
 
+  gimmeItem = key => {
+    console.log('holy shit it works', this);
+    const newItem = {...this.state.toAdd};
+    newItem[key] = newItem[key] + 1 || 1;
+    this.setState({toAdd: newItem});
+
+    this.saveItem();
+  }
+
   saveItem = () => {
     const newItems = {allItems: {...this.state.toAdd}};
     console.log(newItems);
@@ -26,14 +35,6 @@ class AddStuff extends React.Component {
       .catch(err => {
         console.error(err);
       });
-  }
-
-  gimmeItem = key => {
-    const newItem = {...this.state.toAdd};
-    newItem[key] = newItem[key] + 1 || 1;
-    this.setState({toAdd: newItem});
-    console.log('joy', this);
-    this.saveItem();
   }
 
   componentDidMount () {
