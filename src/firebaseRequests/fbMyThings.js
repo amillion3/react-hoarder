@@ -1,19 +1,19 @@
 import constants from '../constants';
 import axios from 'axios';
 
-const getMyHoard = uid => {
+const getAllMyThings = uid => {
   return new Promise((resolve, reject) => {
     axios
       .get(`${constants.firebaseConfig.databaseURL}/myHoard.json?orderBy="uid"&equalTo="${uid}"`)
-      .then(response => {
-        const myHoard = [];
-        if (response.data !== null) {
-          Object.keys(response.data).forEach(key => {
-            response.data[key].id = key;
-            myHoard.push(response.data[key]);
+      .then(res => {
+        const hoard = [];
+        if (res.data !== null) {
+          Object.keys(res.data).forEach(fbKey => {
+            res.data[fbKey].id = fbKey;
+            hoard.push(res.data[fbKey]);
           });
         }
-        resolve(myHoard);
+        resolve(hoard);
       })
       .catch(err => {
         reject(err);
@@ -21,10 +21,10 @@ const getMyHoard = uid => {
   });
 };
 
-const postToMyHoard = newStuff => {
+const addToMyThings = newThing => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${constants.firebaseConfig.databaseURL}/myHoard.json`, newStuff)
+      .post(`${constants.firebaseConfig.databaseURL}/myHoard.json`, newThing)
       .then(res => {
         resolve(res);
       })
@@ -34,4 +34,4 @@ const postToMyHoard = newStuff => {
   });
 };
 
-export default {getMyHoard, postToMyHoard};
+export default {getAllMyThings, addToMyThings};

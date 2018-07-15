@@ -3,9 +3,9 @@ import React from 'react';
 import './Items.css';
 
 class Items extends React.Component {
-  gimmeItem = () => {
-    this.props.hoardIt(this.props.details.id);
-  };
+  addClickEvent = () => {
+    this.props.gimmeItem(this.props.details.id);
+  }
   render () {
     const {details} = this.props;
     return (
@@ -15,12 +15,14 @@ class Items extends React.Component {
         </div>
         <div className="panel-footer">
           <h4>{details.itemName}</h4>
-          <p>{details.itemDescription}</p>
+          <p className='small-text'>{details.itemDescription}</p>
           <div className='col-xs-12'>
             <button
               className='btn btn-warning'
-              onClick={this.addToHoard}
-            >GIMME</button>
+              onClick={this.addClickEvent}
+            >
+              GIMME
+            </button>
           </div>
         </div>
       </div>
