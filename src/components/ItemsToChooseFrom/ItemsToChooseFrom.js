@@ -1,7 +1,9 @@
 import React from 'react';
 
+import authRequests from '../../firebaseRequests/auth';
 import Items from '../Items/Items';
 import fbItems from '../../firebaseRequests/fbItems';
+import fbMyThings from '../../firebaseRequests/fbMyThings';
 
 import './ItemsToChooseFrom.css';
 
@@ -10,13 +12,13 @@ class ItemsToChooseFrom extends React.Component {
     allItems: [],
   }
   saveItem = () => {
-    const newItems = {myItems: {...this.state.toAdd}};
-    console.log(newItems);
+    const newItems = {allItems: {...this.state.allItems}};
+    console.log('saveItem() newItems:', newItems);
     newItems.uid = authRequests.getUid();
-    myStuffRequests
-      .postRequest(newItems)
+    fbMyThings
+      .addToMyThings(newItems)
       .then(() => {
-        this.props.history.push('./');
+        this.props.history.push('./thegoods');
       })
       .catch(err => {
         console.error(err);
@@ -24,10 +26,10 @@ class ItemsToChooseFrom extends React.Component {
   }
 
   gimmeItem = key => {
-    console.log('holy shit it works', this);
     const newItem = {...this.state.allItems};
     newItem[key] = newItem[key] + 1 || 1;
-    this.setState({myItems: newItem});
+    console.log('test, one object', test);
+    this.setState({allItems: newItem});
 
     this.saveItem();
   }
@@ -44,6 +46,7 @@ class ItemsToChooseFrom extends React.Component {
   }
 
   render () {
+    console.log('this and stuffs', this);
     const itemComponents = this.state.allItems.map(item => {
       return (
         <Items

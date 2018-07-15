@@ -1,7 +1,7 @@
 import constants from '../constants';
 import axios from 'axios';
 
-const getMyStuffRequest = uid => {
+const getAllMyThings = uid => {
   return new Promise((resolve, reject) => {
     axios
       .get(`${constants.firebaseConfig.databaseURL}/myHoard.json?orderBy="uid"&equalTo="${uid}"`)
@@ -21,7 +21,7 @@ const getMyStuffRequest = uid => {
   });
 };
 
-const postRequest = newThing => {
+const addToMyThings = newThing => {
   return new Promise((resolve, reject) => {
     axios
       .post(`${constants.firebaseConfig.databaseURL}/myHoard.json`, newThing)
@@ -34,4 +34,4 @@ const postRequest = newThing => {
   });
 };
 
-export default {getMyStuffRequest, postRequest};
+export default {getAllMyThings, addToMyThings};
